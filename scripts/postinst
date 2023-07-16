@@ -1,0 +1,88 @@
+#!/bin/sh
+#PATH="/opt/bin:/opt/sbin:$PATH"
+
+LOG="/var/packages/${SYNOPKG_PKGNAME}/log"
+WMTMP="\/`echo ${SYNOPKG_PKGDEST} | /usr/bin/cut -d'/' -f2`\/@tmp\/.webmin"
+WMCONFFILE="/var/packages/${SYNOPKG_PKGNAME}/target/etc/config"
+DSMLANGUAGE=${SYNOPKG_DSM_LANGUAGE}
+PMEXEC=`/usr/bin/find /volume?/@optware/bin /volume?/@qnapware/opt/bin /volume?/@entware/bin /volumeUSB?/usbshare*/@???ware/bin -type f -iname ?pkg 2> /dev/null`
+
+if [ "$DSMLANGUAGE" = "def" ] ; then
+     DSMLANGUAGE="enu"
+fi
+
+case $DSMLANGUAGE in
+ger)
+	WMLANG="de"  #german
+;;
+enu)
+	WMLANG="en"  #english US
+;;
+chs)
+	WMLANG="zh"  #chinese simplified
+;;
+csy)
+	WMLANG="cs"  #czech
+;;
+jpn)
+	WMLANG="jp"  #japan
+;;
+krn)
+	WMLANG="ko"  #korean
+;;
+dan)
+	WMLANG="da"  #danish
+;;
+fre)
+	WMLANG="fr"  #french
+;;
+ita)
+	WMLANG="it"  #italian
+;;
+nld)
+	WMLANG="nl"  #dutch
+;;
+nor)
+	WMLANG="no"  #norwegian
+;;
+plk)
+	WMLANG="pl"  #polish
+;;
+rus)
+	WMLANG="ru"  #russian
+;;
+spn)
+	WMLANG="sp"  #spanish
+;;
+sve)
+	WMLANG="sv"  #swedish
+;;
+hun)
+	WMLANG="hu"  #hungarian
+;;
+trk)
+	WMLANG="tr"  #turkish
+;;
+ptg)
+	WMLANG="pt"  #portuguese european
+;;
+esac
+if [ ! -f "/tmp/${SYNOPKG_PKGNAME}.upgrade" ] ; then
+     # first install
+     sudo mkdir -p /var/log/webmin/output
+     if [ "$WMLANG" = "de" ] ; then
+          /bin/cat /var/packages/${SYNOPKG_PKGNAME}/scripts/hint_de.txt > $SYNOPKG_TEMP_LOGFILE
+     else
+          /bin/cat /var/packages/${SYNOPKG_PKGNAME}/scripts/hint_en.txt > $SYNOPKG_TEMP_LOGFILE
+     fi
+fi
+
+export WMLANG
+cd /var/packages/${SYNOPKG_PKGNAME}/target/scripts 
+sudo ./install.sh >> $SYNOPKG_TEMP_LOGFILE 2>&1
+/bin/sed -i '-e /Failed to determine/d' -e '/LD_PRELOAD/d' -e '/X-Frame-Options/,/<\/html>/d' $SYNOPKG_TEMP_LOGFILE
+if [ $? == "0" ] ; then
+	[ -f "/opt/sbin/makewhatis" ] && nohup /opt/sbin/makewhatis /opt/man /opt/share/man /volume1/@optware/man /volume1/@optware/share/man &
+else
+	exit 1
+fi

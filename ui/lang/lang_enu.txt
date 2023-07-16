@@ -1,0 +1,16 @@
+#!/bin/bash
+# Filename: lang_enu - coded in utf-8
+
+#                webmin
+#
+#        Copyright (C) 2023 by Akay-Devel 
+# Member of the German Synology Community Forum
+#             License GNU GPLv3
+#   https://www.gnu.org/licenses/gpl-3.0.html
+
+
+# Global language variables
+# --------------------------------------------------------------
+	txtAppTitle="DSM 7 Package Developer Demo"
+	txtAlertOnlyAdmin="Access to the contents of ${app_name} is only permitted to users from the administrators' group."
+

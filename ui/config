@@ -1,0 +1,16 @@
+{
+	".url": {
+		"SYNO.SDS._ThirdParty.App.webmin": {
+			"type": "url",
+			"allUsers": false,
+			"allowMultiInstance": false,
+			"title": "Webmin",
+			"desc": "Webmin",
+			"icon": "images/webmin_{0}.png",
+			"texts": "texts",
+			"protocol": "http",
+			"url": "/",
+			"port": "10000"			
+		}
+	}
+}

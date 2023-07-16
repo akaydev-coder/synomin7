@@ -1,0 +1,16 @@
+#!/bin/bash
+# Filename: lang_ger - coded in utf-8
+
+#                webmin
+#
+#        Copyright (C) 2023 by Akay-Devel 
+# Member of the German Synology Community Forum
+#             License GNU GPLv3
+#   https://www.gnu.org/licenses/gpl-3.0.html
+
+
+# Globale Sprachvariablen
+# --------------------------------------------------------------
+	txtAppTitle="DSM 7 Paketentwickler Demo"
+	txtAlertOnlyAdmin="Der Zugriff auf die Inhalte von ${app_name} ist nur Benutzern aus der Gruppe der Administratoren gestattet."
+

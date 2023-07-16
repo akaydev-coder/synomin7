@@ -1,0 +1,10 @@
+webmin Release Notes
+
+Webmin 2.021 released March 19, 2023
+
+Add ability to set locale in Webmin Users module for consistency
+Fix to preserve initial install directory when upgrading manually
+Fix to preserve minimal install type when upgrading manually
+Fix an error when make_date is called on undefined value #1860
+Fix clearing packages caches before checking for updates in status collection #1863
+Update the Authentic theme to the latest version
